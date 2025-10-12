@@ -1,0 +1,45 @@
+name: bottles
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  bottle:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-22.04, macos-15-intel, macos-26 ]
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cache Homebrew Bundler RubyGems
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+          key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ matrix.os }}-rubygems-
+
+      - name: Run brew test-bot
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          brew tap "$GITHUB_REPOSITORY"
+          brew test-bot vegen
+
+      - name: Upload bottles as artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bottles_${{ matrix.os }}
+          path: ./*.bottle.*
+
+      - name: Create PR with bottle updates
+        if: matrix.os == 'macos-26'
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: brew pr-upload --verbose --debug
