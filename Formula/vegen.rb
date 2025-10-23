@@ -6,9 +6,9 @@ class Vegen < Formula
   license "MIT"
 
   bottle do
-    root_url "https://github.com/KMahoney/homebrew-tap/releases/download/vegen-0.4.0"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "e0a816567289cd28a34de3979dd77619e16f3af6077c6d43cbcede9c0cfb9db2"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "b8f6dc3be3f620ef963f8ac01760957028e417bafdbefec1c6798e9469bd1438"
+    root_url "https://github.com/KMahoney/homebrew-tap/releases/download/vegen-0.5.0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "499eb43f8e3073b103e6aeaa80aa9c713d078d95d6d35915f085c22c6f9f6281"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "d3e24768959400814cd14906538eb5bc1f7269d86327ea8d5dd4445cae5d4dc0"
   end
 
   depends_on "rust" => :build
