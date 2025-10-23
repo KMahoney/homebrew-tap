@@ -1,8 +1,8 @@
 class Vegen < Formula
   desc "Compiler for tiny, efficient, updatable TypeScript HTML templates"
   homepage "https://github.com/KMahoney/vegen"
-  url "https://github.com/KMahoney/vegen/archive/refs/tags/v0.4.0.tar.gz"
-  sha256 "e8cc412ae62c9ec1ae3732b0442d83ac5e4c8df98c68a3d2f03261c2b84f3b2d"
+  url "https://github.com/KMahoney/vegen/archive/refs/tags/v0.5.0.tar.gz"
+  sha256 "89f8ab097066301f8a8e11b76c5663dc9e3f829c4ecb44d32e5a9a2d8b08405e"
   license "MIT"
 
   bottle do
